@@ -1,0 +1,6 @@
+{
+  "name": "bengkel-kerja-tests",
+  "private": true,
+  "type": "module",
+  "main": "../../index.mjs"
+}

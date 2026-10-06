@@ -1,0 +1,13 @@
+{
+  "name": "bengkel-kerja-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "BengkelKerja work-order backend: Node 22 + node:sqlite, zero dependencies",
+  "engines": { "node": ">=22.5.0" },
+  "scripts": {
+    "start": "node src/http/server.js",
+    "test": "node --test test/",
+    "seed": "node -e \"import('./src/db.js').then(async m=>{const db=m.openDb(':memory:');m.migrate(db);console.log((await import('./src/seed.js')).seed(db,{log:console.log}))})\""
+  }
+}
