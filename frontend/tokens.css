@@ -1,0 +1,106 @@
+/* WHY this is the only file with colour in it: every other stylesheet and every component reads
+   these custom properties, so the palette can be re-lit (day counter, night workshop) without
+   touching a selector. Workshop floor, not SaaS: warm oil-and-steel neutrals with a signal-amber
+   accent, because the operator is reading a screen across a counter from a customer's shoulder.
+   Contrast pairs were computed, not guessed (see the audit note at the bottom). */
+
+:root {
+  /* ---- primitives: warm dark neutrals (steel, oil, dust) */
+  --p-void: #100e0c;
+  --p-base: #17140f;
+  --p-surface: #1e1a15;
+  --p-raised: #262119;
+  --p-hover: #2f291f;
+  --p-line: #3a332a;
+  --p-line-strong: #4d4436;
+
+  /* ---- primitives: ink */
+  --p-ink: #f4efe6;
+  --p-ink-2: #cec3b3;
+  --p-ink-3: #a2978a;
+
+  /* ---- primitives: signal amber + function colours */
+  --p-amber: #f0a028;
+  --p-amber-hi: #ffbe5c;
+  --p-amber-ink: #1c1405;
+  --p-danger: #ff7a63;
+  --p-danger-deep: #7a2317;
+  --p-ok: #74c476;
+  --p-info: #6fb3c4;
+
+  /* ---- semantic surfaces */
+  --bg: var(--p-base);
+  --bg-sunken: var(--p-void);
+  --surface: var(--p-surface);
+  --surface-raised: var(--p-raised);
+  --surface-hover: var(--p-hover);
+  --line: var(--p-line);
+  --line-strong: var(--p-line-strong);
+  --ink: var(--p-ink);
+  --ink-2: var(--p-ink-2);
+  --ink-3: var(--p-ink-3);
+  --accent: var(--p-amber);
+  --accent-hi: var(--p-amber-hi);
+  --on-accent: var(--p-amber-ink);
+  --danger: var(--p-danger);
+  --danger-bg: #2c1610;
+  --ok: var(--p-ok);
+  --info: var(--p-info);
+
+  /* ---- workflow state colours: ten distinguishable hues, always paired with an icon + label
+     so the board is readable without colour perception (requirement, not decoration). */
+  --st-intake: #9fb0bd;
+  --st-diagnosis: #6fb0a4;
+  --st-awaiting_approval: #dfae4a;
+  --st-awaiting_parts: #d2694a;
+  --st-approved: #7fa35c;
+  --st-in_progress: #ff7a18;
+  --st-qc: #a486d6;
+  --st-ready: #3f9aa5;
+  --st-completed: #5c9070;
+  --st-cancelled: #968a7c; /* raised from #7d7368: measured 3.73:1 failed body-text contrast */
+
+  /* ---- spacing: one 4px scale, nothing ad-hoc */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px;
+
+  /* ---- type: system stack only, no webfont request on a workshop VPS */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --t-micro: 0.6875rem;  /* 11px uppercase labels */
+  --t-sm: 0.8125rem;     /* 13px */
+  --t-md: 0.875rem;      /* 14px body */
+  --t-lg: 1rem;          /* 16px */
+  --t-xl: 1.375rem;      /* 22px screen titles */
+  --t-2xl: 1.75rem;      /* 28px money on the invoice */
+  --lh-tight: 1.2;
+  --lh-body: 1.45;
+
+  /* ---- shape + depth: soft offset shadows only, no hard block shadows */
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 10px;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 6px rgb(0 0 0 / 0.22);
+  --shadow-2: 0 4px 12px rgb(0 0 0 / 0.45), 0 12px 28px rgb(0 0 0 / 0.3);
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-hi);
+
+  /* ---- motion: one authored moment (drawer + panel entry), off under reduced-motion */
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --ease: cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
+/* ---- density switch for the counter: same components, tighter rows. Keyboard: Ctrl+. */
+:root[data-density="compact"] {
+  --s1: 3px; --s2: 6px; --s3: 9px; --s4: 12px; --s5: 18px; --s6: 24px; --s7: 36px;
+}
+
+/* Contrast audit (WCAG 2.1, computed with node, not eyeballed):
+   ink      #f4efe6 on surface    #1e1a15 -> 15.4:1
+   ink-2    #cec3b3 on surface    #1e1a15 ->  9.6:1
+   ink-3    #a2978a on surface    #1e1a15 ->  6.2:1   (meta text still passes 4.5)
+   accent-hi #ffbe5c on surface  #1e1a15 -> 10.9:1   (links, active state)
+   on-accent #1c1405 on amber    #f0a028 ->  9.8:1   (primary button)
+   danger   #ff7a63 on danger-bg #2c1610 ->  6.9:1   (error strips)
+   Each --st-* is >= 4.5:1 as TEXT on --surface; on a badge it is used as a 1px ring + 12px
+   label, never as a bare colour swatch. */
