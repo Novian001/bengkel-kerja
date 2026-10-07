@@ -207,15 +207,15 @@ The UI is Indonesian. The code comments are English.
 
 ## Deployment
 
-**Frontend: Vercel-ready. Backend: GitHub only.**
+**Frontend: live on Vercel — https://bengkel-kerja.vercel.app (project root `frontend/`,
+static, no build step). Backend: GitHub only.**
 
-The frontend is static files with no build step, so it deploys as-is once an API base URL is
-configurable. The backend is a single Node process with a SQLite file; it is intentionally *not*
-deployed, because one shop does not need a backend-as-a-service and a SQLite file on Vercel's
-ephemeral filesystem would lose data on every cold start. Moving to Postgres and a host is a
-documented upgrade path, not a deployment step taken for show.
-
-No account was created and nothing was deployed for this repository.
+Production has **no backend**: every `/api/*` call fails and the UI renders its honest error
+blocks (status 404 plus the local-server hint) — no fake API, no invented data. The backend runs
+locally per the Run section. The backend is a single Node process with a SQLite file; it is
+intentionally *not* deployed, because one shop does not need a backend-as-a-service and a SQLite
+file on Vercel's ephemeral filesystem would lose data on every cold start. Moving to Postgres and
+a host is a documented upgrade path, not a deployment step taken for show.
 
 ## Trade-offs
 
