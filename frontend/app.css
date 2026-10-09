@@ -398,9 +398,10 @@ ul, ol { padding: 0; list-style: none; }
   background: var(--surface-raised);
 }
 .btn-action:not(:disabled) {
-  border-color: var(--accent); color: var(--accent-hi);
+  border-color: var(--accent); color: var(--on-accent);
+  background: color-mix(in srgb, var(--accent) 20%, var(--surface-raised));
 }
-.btn-action:not(:disabled):hover { background: color-mix(in srgb, var(--accent) 14%, var(--surface-raised)); }
+.btn-action:not(:disabled):hover { background: color-mix(in srgb, var(--accent) 28%, var(--surface-raised)); }
 .btn-action:disabled {
   opacity: 0.62; cursor: not-allowed; color: var(--ink-3);
   border-color: var(--line); background: var(--surface);
